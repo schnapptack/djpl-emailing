@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 import os
-import schnipp_connector
 from setuptools import setup, find_packages
 
 def read(fname):
