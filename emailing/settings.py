@@ -1,11 +1,19 @@
 from django_productline.context import PRODUCT_CONTEXT
 
-introduce_EMAIL_BACKEND = PRODUCT_CONTEXT.EMAIL_BACKEND
-introduce_EMAIL_HOST = PRODUCT_CONTEXT.EMAIL_HOST
-introduce_EMAIL_HOST_USER = PRODUCT_CONTEXT.EMAIL_HOST_USER
-introduce_EMAIL_HOST_PASSWORD = PRODUCT_CONTEXT.EMAIL_HOST_PASSWORD
-introduce_EMAIL_PORT = PRODUCT_CONTEXT.EMAIL_PORT
-introduce_EMAIL_USE_TLS = PRODUCT_CONTEXT.EMAIL_USE_TLS
-introduce_DEFAULT_FROM_EMAIL = PRODUCT_CONTEXT.DEFAULT_FROM_EMAIL
-introduce_SERVER_EMAIL = PRODUCT_CONTEXT.SERVER_EMAIL
-introduce_EMAIL_SUBJECT_PREFIX = PRODUCT_CONTEXT.EMAIL_SUBJECT_PREFIX
+
+# Alternate email backend:
+#   'django.core.mail.backends.console.EmailBackend'
+#   'django.core.mail.backends.filebased.EmailBackend'
+#   'django.core.mail.backends.locmem.EmailBackend'
+#   'django.core.mail.backends.locmem.EmailBackend'
+
+introduce_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+introduce_EMAIL_HOST = None
+introduce_EMAIL_HOST_USER = None
+introduce_EMAIL_HOST_PASSWORD = None
+introduce_EMAIL_PORT = None
+introduce_EMAIL_USE_TLS = True
+introduce_DEFAULT_FROM_EMAIL = None
+introduce_SERVER_EMAIL = None
+introduce_EMAIL_SUBJECT_PREFIX = None
+

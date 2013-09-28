@@ -6,16 +6,5 @@
     "model_fragment": {
         "optional": true,
         "subfeature_of": "django_productline"
-    },
-    "context_template": {
-        "EMAIL_BACKEND": "<djangoemailbackend>",
-        "EMAIL_HOST": "<emailhost>",
-        "EMAIL_HOST_USER": "<emailhostuser>",
-        "EMAIL_HOST_PASSWORD": "<emailhostpassword>",
-        "EMAIL_PORT": "<emailport>",
-        "EMAIL_USE_TLS": "true",
-        "DEFAULT_FROM_EMAIL": "<defaultfromemail>",
-        "SERVER_EMAIL": "<serveremail>",
-        "EMAIL_SUBJECT_PREFIX": "<emailsubjectprefix>"
     }
 }
