@@ -21,7 +21,7 @@ Feature ``emailing.features.contextconf``
 
 This feature refines the email settings to use values given in the product context.
 
-*requires features:* 
+*requires features:*
 
 - ``emailing``
 
@@ -47,5 +47,12 @@ See https://docs.djangoproject.com/en/dev/ref/settings/
 Feature ``emailing.features.console``
 ----------------------------------------
 
-use ``django.core.mail.backends.console.EmailBackend`` as ``EMAIL_BACKEND`` to print emails on stdout instead of sending them.
+ print emails on stdout instead of sending them
+
+Uses ``django.core.mail.backends.console.EmailBackend`` as ``EMAIL_BACKEND`` to print emails on stdout instead of sending them.
 Useful during development/debugging to switch between backends by toggling the feature.
+
+*requires features:*
+
+- ``emailing``
+
