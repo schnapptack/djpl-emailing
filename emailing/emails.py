@@ -17,6 +17,7 @@ class HtmlEmail(EmailMessage):
         context = kwargs.pop('context')
 
         context['brand_bg'] = settings.EMAIL_BRAND_BG
+        context['body_bg'] = settings.EMAIL_BODY_BG
         context['brand_color'] = settings.EMAIL_BRAND_COLOR
         context['link_color'] = settings.EMAIL_LINK_COLOR
         context['footer_content'] = settings.EMAIL_FOOTER_CONTENT

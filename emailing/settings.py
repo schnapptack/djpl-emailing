@@ -6,7 +6,7 @@ def refine_INSTALLED_APPS(original):
 
 
 
-#  explicitely introduce global email settings here, that other features
+# explicitely introduce global email settings here, that other features
 # are able to use refinements consistently (from a django perspective this seems redundant)
 
 introduce_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -22,9 +22,13 @@ introduce_EMAIL_SUBJECT_PREFIX = '[Django] '
 # these colors are used to brand the email appearance
 introduce_EMAIL_BRAND_BG = '#444'
 introduce_EMAIL_BRAND_COLOR = '#fff'
+introduce_EMAIL_BODY_BG = '#f6f6f6'
 introduce_EMAIL_LINK_COLOR = '#417690'
 introduce_EMAIL_FOOTER_CONTENT = '''
     <p>schnapptack GmbH | Schulze-Delitzsch-Straße 13 | 70569 Stuttgart</p>
     <p><a href="http://schnapptack.de">www.schnapptack.de</a></p>
 '''
+
+
+
 
