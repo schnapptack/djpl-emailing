@@ -32,7 +32,7 @@ setup(
         'Operating System :: OS Independent'
     ],
     install_requires=[
-        'django-productline',
+        'django-productline', 'premailer==3.0.1'
     ]
 )
 
