@@ -25,10 +25,6 @@ introduce_EMAIL_BRAND_COLOR = '#fff'
 introduce_EMAIL_BODY_BG = '#f6f6f6'
 introduce_EMAIL_LINK_COLOR = '#417690'
 introduce_EMAIL_FOOTER_CONTENT = '''
-    <p>schnapptack GmbH | Schulze-Delitzsch-Straße 13 | 70569 Stuttgart</p>
+    <p>schnapptack GmbH | Schulze-Delitzsch-Straße 13 | 70565 Stuttgart</p>
     <p><a href="http://schnapptack.de">www.schnapptack.de</a></p>
 '''
-
-
-
-
