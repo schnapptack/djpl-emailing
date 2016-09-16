@@ -29,12 +29,19 @@ class HtmlEmail(EmailMessage):
         context['footer_content'] = settings.EMAIL_FOOTER_CONTENT
 
         kwargs['body'] = transform(get_template(template).render(Context(context)))
+        styles = get_template('emailing/styles.html').render()
+
+        #add stylings to html after premailer transform
+        #some stylings need to be inlined some not
+        kwargs['body'] = kwargs['body'].replace("<!--STYLINGHACK-->", styles)
+
         super(HtmlEmail, self).__init__(*args, **kwargs)
 
 
     def send(self, *args, **kwargs):
+        kwargs['fail_silently'] = False
         try:
-            super(HtmlEmail, self).send(*args, fail_silently=False, **kwargs)
+            super(HtmlEmail, self).send(*args, **kwargs)
         except Exception:
             if settings.FALLBACK_EMAIL != 'webmaster@localhost':
                 fallback_mail = settings.FALLBACK_EMAIL
