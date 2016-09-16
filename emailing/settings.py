@@ -18,6 +18,7 @@ introduce_EMAIL_USE_TLS = False
 introduce_DEFAULT_FROM_EMAIL = 'webmaster@localhost'
 introduce_SERVER_EMAIL = 'root@localhost'
 introduce_EMAIL_SUBJECT_PREFIX = '[Django] '
+introduce_FALLBACK_EMAIL = 'webmaster@localhost'
 
 # these colors are used to brand the email appearance
 introduce_EMAIL_BRAND_BG = '#444'

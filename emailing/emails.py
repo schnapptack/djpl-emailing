@@ -38,5 +38,5 @@ class HtmlEmail(EmailMessage):
             msg['From'] = settings.DEFAULT_FROM_EMAIL
             msg['To'] = settings.SERVER_EMAIL
             msg.attach(MIMEText(self.body, 'html'))
-            smtpObj.sendmail(settings.DEFAULT_FROM_EMAIL, settings.SERVER_EMAIL, msg.as_string())
+            smtpObj.sendmail(settings.FALLBACK_EMAIL, settings.FALLBACK_EMAIL, msg.as_string())
             raise
