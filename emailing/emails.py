@@ -29,7 +29,7 @@ class HtmlEmail(EmailMessage):
         context['footer_content'] = settings.EMAIL_FOOTER_CONTENT
 
         kwargs['body'] = transform(get_template(template).render(Context(context)))
-        styles = get_template('emailing/styles.html').render()
+        styles = get_template('emailing/styles.html').render(Context(context))
 
         #add stylings to html after premailer transform
         #some stylings need to be inlined some not

@@ -1,40 +1,28 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-    <!--
-    ==================== Respmail ====================
-    Respmail is a response HTML email designed to work
-    on all major devices and responsive for smartphones
-    that support media queries.
-
-    ** Profile **
-    Licensed under MIT (https://github.com/charlesmudy/responsive-html-email-template/blob/master/LICENSE)
-    Designed by Shina Charles Memud
-    Respmail v1.2 (http://charlesmudy.com/respmail/)
-
-    -->
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="format-detection" content="telephone=no" /> <!-- disable auto telephone linking in iOS -->
+		<meta name="format-detection" content="telephone=no"> <!-- disable auto telephone linking in iOS -->
 		<title>E-Mail</title>
-      <!--STYLINGHACK-->
-      <style type="text/css">
-        #headertext h1 {color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:35px;font-weight:normal;margin-bottom:5px;text-align:center;}
-        #headertext h2 {text-align:center;font-weight:normal;font-family:Helvetica,Arial,sans-serif;font-size:23px;margin-bottom:10px;color:#205478;line-height:135%;}
-        #headertext div {text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#FFFFFF;line-height:135%;}
-        #bodytext h3 {color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;}
-        #bodytext div {text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;margin-top:10px;color:#5F5F5F;line-height:135%;}
-        #bodytext td {color:#5F5F5F !important;font-family:Helvetica, Arial, sans-serif;font-size:15px;line-height:135%;}
-        .contentwrapper {margin: 22px 0; padding: 22px 0;}
-        .closingwrapper {border-top: 1px solid #ddd; margin-top: 0px; padding-top: 10px;}
-        .bodytable {padding-top: 5px;}
-        #bodytext table {width:100%;}
-        #bodytext table tr td {padding-top:5px; padding-bottom:5px; padding-left: 5px;}
-        #bodytext table tr td:first-child {padding-right:25px; text-align: left;}
-        #bodytext table tr td:last-child {padding-left:20px;}
-      </style>
+
+    <!--STYLINGHACK-->
+    <style type="text/css">
+      #headertext h1 {color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:35px;font-weight:normal;margin-bottom:5px;text-align:center;}
+      #headertext h2 {text-align:center;font-weight:normal;font-family:Helvetica,Arial,sans-serif;font-size:23px;margin-bottom:10px;color:#205478;line-height:135%;}
+      #headertext div {text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#FFFFFF;line-height:135%;}
+      .wrapper h3 {color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;}
+      .wrapper div {text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;margin-top:10px;color:#5F5F5F;line-height:135%;}
+			.text-align-center {text-align:center !important;}
+			.bodytext td {color:#5F5F5F !important;font-family:Helvetica, Arial, sans-serif;font-size:15px;line-height:135%;}
+      .contentwrapper {margin: 22px 0; padding: 22px 0;}
+      .closingwrapper {border-top: 1px solid #ddd; margin-top: 0px; padding-top: 10px;}
+      .bodytable {padding-top: 5px;}
+      .wrapper table {width:100%;}
+      .wrapper table tr td {padding-top:5px; padding-bottom:5px; padding-left: 5px;}
+      .wrapper table tr td:first-child {padding-right:25px; text-align: left;}
+      .wrapper table tr td:last-child {padding-left:20px;}
+    </style>
+
 		<!--
 			Outlook Conditional CSS
 
@@ -56,7 +44,7 @@
 			</style>
 		<![endif]-->
 	</head>
-	<body bgcolor="#F9F9F9" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+	<body bgcolor="#E1E1E1" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
 
 		<!-- CENTER THE EMAIL // -->
 		<!--
@@ -69,9 +57,9 @@
 			the email starts from this center, so we try to
 			apply necessary styling e.g. background-color.
 		-->
-		<center style="background-color:#F9F9F9;">
+		<center style="background-color:#E1E1E1;">
 			<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="table-layout: fixed;max-width:100% !important;width: 100% !important;min-width: 100% !important;">
-				<tr>
+				<tbody><tr>
 					<td align="center" valign="top" id="bodyCell">
 
 						<!-- EMAIL HEADER // -->
@@ -80,23 +68,23 @@
 							Its width can be set to 100% for a color band
 							that spans the width of the page.
 						-->
-						<table bgcolor="#F9F9F9" border="0" cellpadding="0" cellspacing="0" width="700" id="emailHeader">
+						<table bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" width="600" id="emailHeader">
 
 							<!-- HEADER ROW // -->
-							<tr>
+							<tbody><tr>
 								<td align="center" valign="top">
 									<!-- CENTERING TABLE // -->
 									<table border="0" cellpadding="0" cellspacing="0" width="100%">
-										<tr>
+										<tbody><tr>
 											<td align="center" valign="top">
 												<!-- FLEXIBLE CONTAINER // -->
-												<table border="0" cellpadding="10" cellspacing="0" width="700" class="flexibleContainer">
-													<tr>
-														<td valign="top" width="700" class="flexibleContainerCell">
+												<table border="0" cellpadding="10" cellspacing="0" width="600" class="flexibleContainer">
+													<tbody><tr>
+														<td valign="top" width="600" class="flexibleContainerCell">
 
 															<!-- CONTENT TABLE // -->
 															<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
-																<tr>
+																<tbody><tr>
 																	<!--
 																		The "invisibleIntroduction" is the text used for short preview
 																		of the email before the user opens it (50 characters max). Sometimes,
@@ -109,39 +97,41 @@
 																	-->
 																	<td align="left" valign="middle" id="invisibleIntroduction" class="flexibleContainerBox" style="display:none !important; mso-hide:all;">
 																		<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:100%;">
-																			<tr>
+																			<tbody><tr>
 																				<td align="left" class="textContent">
 																					<div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
-																						<!-- The introduction of your message preview goes here. Try to make it short. -->
+
 																					</div>
 																				</td>
 																			</tr>
-																		</table>
+																		</tbody></table>
 																	</td>
 																	<td align="right" valign="middle" class="flexibleContainerBox">
 																		<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:100%;">
-																			<tr>
+																			<tbody><tr>
 																				<td align="left" class="textContent">
 																					<!-- CONTENT // -->
+																					<div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
+																					</div>
 																				</td>
 																			</tr>
-																		</table>
+																		</tbody></table>
 																	</td>
 																</tr>
-															</table>
+															</tbody></table>
 														</td>
 													</tr>
-												</table>
+												</tbody></table>
 												<!-- // FLEXIBLE CONTAINER -->
 											</td>
 										</tr>
-									</table>
+									</tbody></table>
 									<!-- // CENTERING TABLE -->
 								</td>
 							</tr>
 							<!-- // END -->
 
-						</table>
+						</tbody></table>
 						<!-- // END -->
 
 						<!-- EMAIL BODY // -->
@@ -150,7 +140,7 @@
 							Its width can be set to 100% for a color band
 							that spans the width of the page.
 						-->
-						<table bgcolor="#FFFFFF"  border="0" cellpadding="0" cellspacing="0" width="700" id="emailBody">
+						<table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody">
 
 							<!-- MODULE ROW // -->
 							<!--
@@ -158,7 +148,7 @@
 								in this email, simply move or copy the entire
 								MODULE ROW section for each content block.
 							-->
-							<tr>
+							<tbody><tr>
 								<td align="center" valign="top">
 									<!-- CENTERING TABLE // -->
 									<!--
@@ -167,7 +157,7 @@
 										in case its width is set to 100%.
 									-->
 									<table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" bgcolor="#3498db">
-										<tr>
+										<tbody><tr>
 											<td align="center" valign="top">
 												<!-- FLEXIBLE CONTAINER // -->
 												<!--
@@ -176,9 +166,9 @@
 													Most content tables within can then be
 													given 100% widths.
 												-->
-												<table border="0" cellpadding="0" cellspacing="0" width="700" class="flexibleContainer">
-													<tr>
-														<td align="center" valign="top" width="700" class="flexibleContainerCell">
+												<table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer">
+													<tbody><tr>
+														<td align="center" valign="top" width="600" class="flexibleContainerCell">
 
 															<!-- CONTENT TABLE // -->
 															<!--
@@ -187,65 +177,54 @@
 																framework of the email.
 															-->
 															<table border="0" cellpadding="30" cellspacing="0" width="100%">
-																<tr>
+																<tbody><tr>
 																	<td id="headertext" align="center" valign="top" class="textContent">
 																		{% block header %}{% endblock %}
 																	</td>
 																</tr>
-															</table>
+															</tbody></table>
 															<!-- // CONTENT TABLE -->
 
 														</td>
 													</tr>
-												</table>
+												</tbody></table>
 												<!-- // FLEXIBLE CONTAINER -->
 											</td>
 										</tr>
-									</table>
+									</tbody></table>
 									<!-- // CENTERING TABLE -->
 								</td>
 							</tr>
 							<!-- // MODULE ROW -->
 
+
 							<!-- MODULE ROW // -->
-							<tr>
-								<td align="center" valign="top">
-									<!-- CENTERING TABLE // -->
-									<table border="0" cellpadding="0" cellspacing="0" width="100%">
-										<tr style="padding-top:0;">
-											<td align="center" valign="top">
-												<!-- FLEXIBLE CONTAINER // -->
-												<table border="0" cellpadding="30" cellspacing="0" width="700" class="flexibleContainer">
-													<tr>
-													</tr>
-												</table>
-												<!-- // FLEXIBLE CONTAINER -->
-											</td>
-										</tr>
-									</table>
-									<!-- // CENTERING TABLE -->
-								</td>
-							</tr>
+							<!--  The "mc:hideable" is a feature for MailChimp which allows
+								you to disable certain row. It works perfectly for our row structure.
+								http://kb.mailchimp.com/article/template-language-creating-editable-content-areas/
+							-->
+
 							<!-- // MODULE ROW -->
-              <tr>
+							<tr>
 								<td align="center" valign="top">
 									<!-- CENTERING TABLE // -->
 									<table border="0" cellpadding="0" cellspacing="0" width="100%">
 										<tbody><tr>
 											<td align="center" valign="top">
 												<!-- FLEXIBLE CONTAINER // -->
-												<table border="0" cellpadding="0" cellspacing="0" width="550" class="flexibleContainer">
+												<table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer">
 													<tbody><tr>
-														<td align="center" valign="top" width="550" class="flexibleContainerCell">
+														<td align="center" valign="top" width="600" class="flexibleContainerCell">
 															<table border="0" cellpadding="30" cellspacing="0" width="100%">
 																<tbody><tr>
-																	<td class="bodytable" align="center" valign="top">
+																	<td align="center" valign="top">
 
 																		<!-- CONTENT TABLE // -->
 																		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 																			<tbody><tr>
 																				<td valign="top" id="bodytext" class="textContent">
 																					{% block content %}{% endblock %}
+																				</td>
 																			</tr>
 																		</tbody></table>
 																		<!-- // CONTENT TABLE -->
@@ -263,8 +242,11 @@
 									<!-- // CENTERING TABLE -->
 								</td>
 							</tr>
+							<!-- // MODULE ROW -->
+								{% block content_outer %} {% endblock %}
 
-						</table>
+
+						</tbody></table>
 						<!-- // END -->
 
 						<!-- EMAIL FOOTER // -->
@@ -273,7 +255,7 @@
 							Its width can be set to 100% for a color band
 							that spans the width of the page.
 						-->
-						<table bgcolor="#F9F9F9" border="0" cellpadding="0" cellspacing="0" width="700" id="emailFooter">
+						<table bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" width="600" id="emailFooter">
 
 							<!-- FOOTER ROW // -->
 							<!--
@@ -281,45 +263,47 @@
 								in this email, simply move or copy the entire
 								MODULE ROW section for each content block.
 							-->
-							<tr>
+							<tbody><tr>
 								<td align="center" valign="top">
 									<!-- CENTERING TABLE // -->
 									<table border="0" cellpadding="0" cellspacing="0" width="100%">
-										<tr>
+										<tbody><tr>
 											<td align="center" valign="top">
 												<!-- FLEXIBLE CONTAINER // -->
-												<table border="0" cellpadding="0" cellspacing="0" width="700" class="flexibleContainer">
-													<tr>
-														<td align="center" valign="top" width="700" class="flexibleContainerCell">
+												<table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer">
+													<tbody><tr>
+														<td align="center" valign="top" width="600" class="flexibleContainerCell">
 															<table border="0" cellpadding="30" cellspacing="0" width="100%">
-																<tr>
-																	<td valign="top" bgcolor="#F9F9F9">
+																<tbody><tr>
+																	<td valign="top" bgcolor="#E1E1E1">
 
 																		<div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
-                                      {% block footer %}
+																			{% block footer %}
                                           {{ footer_content|safe }}
                                       {% endblock %}
 																		</div>
+
 																	</td>
 																</tr>
-															</table>
+															</tbody></table>
 														</td>
 													</tr>
-												</table>
+												</tbody></table>
 												<!-- // FLEXIBLE CONTAINER -->
 											</td>
 										</tr>
-									</table>
+									</tbody></table>
 									<!-- // CENTERING TABLE -->
 								</td>
 							</tr>
 
-						</table>
+						</tbody></table>
 						<!-- // END -->
 
 					</td>
 				</tr>
-			</table>
+			</tbody></table>
 		</center>
-	</body>
-</html>
+
+
+</body></html>
