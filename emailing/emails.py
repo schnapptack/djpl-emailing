@@ -3,7 +3,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.core.mail import EmailMessage
 from django.conf import settings
-from premailer import transform
+import premailer
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib, os
@@ -28,12 +28,7 @@ class HtmlEmail(EmailMessage):
         context['link_color'] = settings.EMAIL_LINK_COLOR
         context['footer_content'] = settings.EMAIL_FOOTER_CONTENT
 
-        kwargs['body'] = transform(get_template(template).render(Context(context)))
-        styles = get_template('emailing/styles.html').render(Context(context))
-
-        #add stylings to html after premailer transform
-        #some stylings need to be inlined some not
-        kwargs['body'] = kwargs['body'].replace("<!--STYLINGHACK-->", styles)
+        kwargs['body'] = premailer.transform(get_template(template).render(Context(context)))
 
         super(HtmlEmail, self).__init__(*args, **kwargs)
 

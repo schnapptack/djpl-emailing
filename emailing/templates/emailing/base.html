@@ -1,309 +1,327 @@
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="format-detection" content="telephone=no"> <!-- disable auto telephone linking in iOS -->
-		<title>E-Mail</title>
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Simple Transactional Email</title>
+    <style>
+      /* -------------------------------------
+          GLOBAL RESETS
+      ------------------------------------- */
+      img {
+        border: none;
+        -ms-interpolation-mode: bicubic;
+        max-width: 100%; }
 
-    <!--STYLINGHACK-->
-    <style type="text/css">
-      #headertext h1 {color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:35px;font-weight:normal;margin-bottom:5px;text-align:center;}
-      #headertext h2 {text-align:center;font-weight:normal;font-family:Helvetica,Arial,sans-serif;font-size:23px;margin-bottom:10px;color:#205478;line-height:135%;}
-      #headertext div {text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#FFFFFF;line-height:135%;}
-      .wrapper h3 {color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;}
-      .wrapper div {text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;margin-top:10px;color:#5F5F5F;line-height:135%;}
-			.text-align-center {text-align:center !important;}
-			.bodytext td {color:#5F5F5F !important;font-family:Helvetica, Arial, sans-serif;font-size:15px;line-height:135%;}
-      .contentwrapper {margin: 22px 0; padding: 22px 0;}
-      .closingwrapper {border-top: 1px solid #ddd; margin-top: 0px; padding-top: 10px;}
-      .bodytable {padding-top: 5px;}
-      .wrapper table {width:100%;}
-      .wrapper table tr td {padding-top:5px; padding-bottom:5px; padding-left: 5px;}
-      .wrapper table tr td:first-child {padding-right:25px; text-align: left;}
-      .wrapper table tr td:last-child {padding-left:20px;}
+      body {
+        background-color: #f6f6f6;
+        color:#666666;
+        font-family: sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%; }
+
+      table {
+        border-collapse: separate;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        width: 100%; }
+        table td {
+          font-family: sans-serif;
+          font-size: 14px;
+          vertical-align: top; }
+
+      /* -------------------------------------
+          BODY & CONTAINER
+      ------------------------------------- */
+
+      .body {
+        background-color: #f6f6f6;
+        width: 100%; }
+
+      /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+      .container {
+        display: block;
+        Margin: 0 auto !important;
+        /* makes it centered */
+        max-width: 580px;
+        padding: 10px;
+
+        width: 580px; }
+
+      /* This should also be a block element, so that it will fill 100% of the .container */
+      .content {
+        box-sizing: border-box;
+        display: block;
+        Margin: 0 auto;
+        max-width: 580px;
+        padding: 10px; }
+
+      /* -------------------------------------
+          HEADER, FOOTER, MAIN
+      ------------------------------------- */
+      .main {
+        background: #fff;
+        border-radius: 3px;
+        width: 100%; }
+
+      .wrapper {
+        box-sizing: border-box;
+        padding: 20px; }
+
+      .footer {
+        clear: both;
+        padding-top: 10px;
+        text-align: center;
+        width: 100%; }
+        .footer td,
+        .footer p,
+        .footer span,
+        .footer a {
+          color: #999999;
+          font-size: 12px;
+          text-align: center; }
+
+      /* -------------------------------------
+          TYPOGRAPHY
+      ------------------------------------- */
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #666666;
+        font-family: sans-serif;
+        font-weight: 300;
+        line-height: 1.4;
+        margin: 0;
+        Margin-bottom: 30px; }
+
+      h1 {
+        font-size: 35px;
+        font-weight: 300;
+        text-align: left;
+        text-transform: capitalize; }
+
+      p,
+      ul,
+      ol {
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0;
+        Margin-bottom: 15px; }
+        p li,
+        ul li,
+        ol li {
+          list-style-position: inside;
+          margin-left: 5px; }
+
+      a {
+        color: {{ link_color }};
+        text-decoration: underline; }
+
+      /* -------------------------------------
+          BUTTONS
+      ------------------------------------- */
+      .btn {
+        box-sizing: border-box;
+        width: 100%; }
+        .btn > tbody > tr > td {
+          padding-bottom: 15px; }
+        .btn table {
+          width: auto; }
+        .btn table td {
+          background-color: #ffffff;
+          border-radius: 5px;
+          text-align: center; }
+        .btn a {
+          background-color: #ffffff;
+          border: solid 1px {{ brand_bg }};
+          border-radius: 5px;
+          box-sizing: border-box;
+          color: {{ brand_bg }};
+          cursor: pointer;
+          display: inline-block;
+          font-size: 14px;
+          font-weight: bold;
+          margin: 0;
+          padding: 12px 25px;
+          text-decoration: none;
+          text-transform: capitalize; }
+
+      .btn-primary table td {
+        background-color: {{ brand_bg }}; }
+
+      .btn-primary a {
+        background-color: {{ brand_bg }};
+        border-color: {{ brand_bg }};
+        color: {{ brand_color }}; }
+
+      /* -------------------------------------
+          OTHER STYLES THAT MIGHT BE USEFUL
+      ------------------------------------- */
+      .last {
+        margin-bottom: 0; }
+
+      .first {
+        margin-top: 0; }
+
+      .align-center {
+        text-align: center; }
+
+      .align-right {
+        text-align: right; }
+
+      .align-left {
+        text-align: left; }
+
+      .clear {
+        clear: both; }
+
+      .mt0 {
+        margin-top: 0; }
+
+      .mb0 {
+        margin-bottom: 0; }
+
+      .preheader {
+        color: transparent;
+        display: none;
+        height: 0;
+        max-height: 0;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        mso-hide: all;
+        visibility: hidden;
+        width: 0; }
+
+      .powered-by a {
+        text-decoration: none; }
+
+      hr {
+        border: 0;
+        border-bottom: 1px solid #f6f6f6;
+        Margin: 20px 0; }
+
+      /* -------------------------------------
+          RESPONSIVE AND MOBILE FRIENDLY STYLES
+      ------------------------------------- */
+      @media only screen and (max-width: 620px) {
+        table[class=body] h1 {
+          font-size: 28px !important;
+          margin-bottom: 10px !important; }
+        table[class=body] p,
+        table[class=body] ul,
+        table[class=body] ol,
+        table[class=body] td,
+        table[class=body] span,
+        table[class=body] a {
+          font-size: 16px !important; }
+        table[class=body] .wrapper,
+        table[class=body] .article {
+          padding: 10px !important; }
+        table[class=body] .content {
+          padding: 0 !important; }
+        table[class=body] .container {
+          padding: 0 !important;
+          width: 100% !important; }
+        table[class=body] .main {
+          border-left-width: 0 !important;
+          border-radius: 0 !important;
+          border-right-width: 0 !important; }
+        table[class=body] .btn table {
+          width: 100% !important; }
+        table[class=body] .btn a {
+          width: 100% !important; }
+        table[class=body] .img-responsive {
+          height: auto !important;
+          max-width: 100% !important;
+          width: auto !important; }}
+
+      /* -------------------------------------
+          PRESERVE THESE STYLES IN THE HEAD
+      ------------------------------------- */
+      @media all {
+        .ExternalClass {
+          width: 100%; }
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+          line-height: 100%; }
+        .apple-link a {
+          color: inherit !important;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          font-weight: inherit !important;
+          line-height: inherit !important;
+          text-decoration: none !important; }
+        .btn-primary table td:hover {
+          background-color: #34495e !important; }
+        .btn-primary a:hover {
+          background-color: #34495e !important;
+          border-color: #34495e !important; } }
+
     </style>
+  </head>
+  <body class="">
+    <table border="0" cellpadding="0" cellspacing="0" class="body">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="container">
+          <div class="content">
 
-		<!--
-			Outlook Conditional CSS
+            <!-- START CENTERED WHITE CONTAINER -->
+            {% comment %}<span class="preheader"></span>{% endcomment %}
+            <table class="main">
 
-			These two style blocks target Outlook 2007 & 2010 specifically, forcing
-			columns into a single vertical stack as on mobile clients. This is
-			primarily done to avoid the 'page break bug' and is optional.
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper">
+                  <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        {% block content %}
 
-			More information here:
-			http://templates.mailchimp.com/development/css/outlook-conditional-css
-		-->
-		<!--[if mso 12]>
-			<style type="text/css">
-				.flexibleContainer{display:block !important; width:100% !important;}
-			</style>
-		<![endif]-->
-		<!--[if mso 14]>
-			<style type="text/css">
-				.flexibleContainer{display:block !important; width:100% !important;}
-			</style>
-		<![endif]-->
-	</head>
-	<body bgcolor="#E1E1E1" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+                        {% endblock %}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
 
-		<!-- CENTER THE EMAIL // -->
-		<!--
-		1.  The center tag should normally put all the
-			content in the middle of the email page.
-			I added "table-layout: fixed;" style to force
-			yahoomail which by default put the content left.
+              <!-- END MAIN CONTENT AREA -->
+              </table>
 
-		2.  For hotmail and yahoomail, the contents of
-			the email starts from this center, so we try to
-			apply necessary styling e.g. background-color.
-		-->
-		<center style="background-color:#E1E1E1;">
-			<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="table-layout: fixed;max-width:100% !important;width: 100% !important;min-width: 100% !important;">
-				<tbody><tr>
-					<td align="center" valign="top" id="bodyCell">
+            <!-- START FOOTER -->
+            <div class="footer">
+              <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="content-block">
+                    {% block footer %}{{ footer_content|safe }}{% endblock %}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="content-block powered-by">
+                    {% block footer2 %}{% endblock %}
+                  </td>
+                </tr>
+              </table>
+            </div>
 
-						<!-- EMAIL HEADER // -->
-						<!--
-							The table "emailBody" is the email's container.
-							Its width can be set to 100% for a color band
-							that spans the width of the page.
-						-->
-						<table bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" width="600" id="emailHeader">
+            <!-- END FOOTER -->
 
-							<!-- HEADER ROW // -->
-							<tbody><tr>
-								<td align="center" valign="top">
-									<!-- CENTERING TABLE // -->
-									<table border="0" cellpadding="0" cellspacing="0" width="100%">
-										<tbody><tr>
-											<td align="center" valign="top">
-												<!-- FLEXIBLE CONTAINER // -->
-												<table border="0" cellpadding="10" cellspacing="0" width="600" class="flexibleContainer">
-													<tbody><tr>
-														<td valign="top" width="600" class="flexibleContainerCell">
-
-															<!-- CONTENT TABLE // -->
-															<table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
-																<tbody><tr>
-																	<!--
-																		The "invisibleIntroduction" is the text used for short preview
-																		of the email before the user opens it (50 characters max). Sometimes,
-																		you do not want to show this message depending on your design but this
-																		text is highly recommended.
-
-																		You do not have to worry if it is hidden, the next <td> will automatically
-																		center and apply to the width 100% and also shrink to 50% if the first <td>
-																		is visible.
-																	-->
-																	<td align="left" valign="middle" id="invisibleIntroduction" class="flexibleContainerBox" style="display:none !important; mso-hide:all;">
-																		<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:100%;">
-																			<tbody><tr>
-																				<td align="left" class="textContent">
-																					<div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
-
-																					</div>
-																				</td>
-																			</tr>
-																		</tbody></table>
-																	</td>
-																	<td align="right" valign="middle" class="flexibleContainerBox">
-																		<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:100%;">
-																			<tbody><tr>
-																				<td align="left" class="textContent">
-																					<!-- CONTENT // -->
-																					<div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
-																					</div>
-																				</td>
-																			</tr>
-																		</tbody></table>
-																	</td>
-																</tr>
-															</tbody></table>
-														</td>
-													</tr>
-												</tbody></table>
-												<!-- // FLEXIBLE CONTAINER -->
-											</td>
-										</tr>
-									</tbody></table>
-									<!-- // CENTERING TABLE -->
-								</td>
-							</tr>
-							<!-- // END -->
-
-						</tbody></table>
-						<!-- // END -->
-
-						<!-- EMAIL BODY // -->
-						<!--
-							The table "emailBody" is the email's container.
-							Its width can be set to 100% for a color band
-							that spans the width of the page.
-						-->
-						<table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody">
-
-							<!-- MODULE ROW // -->
-							<!--
-								To move or duplicate any of the design patterns
-								in this email, simply move or copy the entire
-								MODULE ROW section for each content block.
-							-->
-							<tbody><tr>
-								<td align="center" valign="top">
-									<!-- CENTERING TABLE // -->
-									<!--
-										The centering table keeps the content
-										tables centered in the emailBody table,
-										in case its width is set to 100%.
-									-->
-									<table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" bgcolor="#3498db">
-										<tbody><tr>
-											<td align="center" valign="top">
-												<!-- FLEXIBLE CONTAINER // -->
-												<!--
-													The flexible container has a set width
-													that gets overridden by the media query.
-													Most content tables within can then be
-													given 100% widths.
-												-->
-												<table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer">
-													<tbody><tr>
-														<td align="center" valign="top" width="600" class="flexibleContainerCell">
-
-															<!-- CONTENT TABLE // -->
-															<!--
-															The content table is the first element
-																that's entirely separate from the structural
-																framework of the email.
-															-->
-															<table border="0" cellpadding="30" cellspacing="0" width="100%">
-																<tbody><tr>
-																	<td id="headertext" align="center" valign="top" class="textContent">
-																		{% block header %}{% endblock %}
-																	</td>
-																</tr>
-															</tbody></table>
-															<!-- // CONTENT TABLE -->
-
-														</td>
-													</tr>
-												</tbody></table>
-												<!-- // FLEXIBLE CONTAINER -->
-											</td>
-										</tr>
-									</tbody></table>
-									<!-- // CENTERING TABLE -->
-								</td>
-							</tr>
-							<!-- // MODULE ROW -->
-
-
-							<!-- MODULE ROW // -->
-							<!--  The "mc:hideable" is a feature for MailChimp which allows
-								you to disable certain row. It works perfectly for our row structure.
-								http://kb.mailchimp.com/article/template-language-creating-editable-content-areas/
-							-->
-
-							<!-- // MODULE ROW -->
-							<tr>
-								<td align="center" valign="top">
-									<!-- CENTERING TABLE // -->
-									<table border="0" cellpadding="0" cellspacing="0" width="100%">
-										<tbody><tr>
-											<td align="center" valign="top">
-												<!-- FLEXIBLE CONTAINER // -->
-												<table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer">
-													<tbody><tr>
-														<td align="center" valign="top" width="600" class="flexibleContainerCell">
-															<table border="0" cellpadding="30" cellspacing="0" width="100%">
-																<tbody><tr>
-																	<td align="center" valign="top">
-
-																		<!-- CONTENT TABLE // -->
-																		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-																			<tbody><tr>
-																				<td valign="top" id="bodytext" class="textContent">
-																					{% block content %}{% endblock %}
-																				</td>
-																			</tr>
-																		</tbody></table>
-																		<!-- // CONTENT TABLE -->
-
-																	</td>
-																</tr>
-															</tbody></table>
-														</td>
-													</tr>
-												</tbody></table>
-												<!-- // FLEXIBLE CONTAINER -->
-											</td>
-										</tr>
-									</tbody></table>
-									<!-- // CENTERING TABLE -->
-								</td>
-							</tr>
-							<!-- // MODULE ROW -->
-								{% block content_outer %} {% endblock %}
-
-
-						</tbody></table>
-						<!-- // END -->
-
-						<!-- EMAIL FOOTER // -->
-						<!--
-							The table "emailBody" is the email's container.
-							Its width can be set to 100% for a color band
-							that spans the width of the page.
-						-->
-						<table bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" width="600" id="emailFooter">
-
-							<!-- FOOTER ROW // -->
-							<!--
-								To move or duplicate any of the design patterns
-								in this email, simply move or copy the entire
-								MODULE ROW section for each content block.
-							-->
-							<tbody><tr>
-								<td align="center" valign="top">
-									<!-- CENTERING TABLE // -->
-									<table border="0" cellpadding="0" cellspacing="0" width="100%">
-										<tbody><tr>
-											<td align="center" valign="top">
-												<!-- FLEXIBLE CONTAINER // -->
-												<table border="0" cellpadding="0" cellspacing="0" width="600" class="flexibleContainer">
-													<tbody><tr>
-														<td align="center" valign="top" width="600" class="flexibleContainerCell">
-															<table border="0" cellpadding="30" cellspacing="0" width="100%">
-																<tbody><tr>
-																	<td valign="top" bgcolor="#E1E1E1">
-
-																		<div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
-																			{% block footer %}
-                                          {{ footer_content|safe }}
-                                      {% endblock %}
-																		</div>
-
-																	</td>
-																</tr>
-															</tbody></table>
-														</td>
-													</tr>
-												</tbody></table>
-												<!-- // FLEXIBLE CONTAINER -->
-											</td>
-										</tr>
-									</tbody></table>
-									<!-- // CENTERING TABLE -->
-								</td>
-							</tr>
-
-						</tbody></table>
-						<!-- // END -->
-
-					</td>
-				</tr>
-			</tbody></table>
-		</center>
-
-
-</body></html>
+<!-- END CENTERED WHITE CONTAINER --></div>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</html>
