@@ -12,6 +12,7 @@ def refine_get_context_template(original):
             EMAIL_HOST_PASSWORD=None,
             EMAIL_PORT=None,
             EMAIL_USE_TLS=None,
+	    EMAIL_USE_SSL=None,
             DEFAULT_FROM_EMAIL=None,
             SERVER_EMAIL=None,
             EMAIL_SUBJECT_PREFIX=None,

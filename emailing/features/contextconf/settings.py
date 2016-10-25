@@ -35,6 +35,9 @@ def refine_EMAIL_PORT(original):
 def refine_EMAIL_USE_TLS(original):
     return _override(PRODUCT_CONTEXT.EMAIL_USE_TLS, original)
 
+def refine_EMAIL_USE_SSL(original):
+    return _override(PRODUCT_CONTEXT.EMAIL_USE_SSL, original)
+
 
 def refine_DEFAULT_FROM_EMAIL(original):
     return _override(PRODUCT_CONTEXT.DEFAULT_FROM_EMAIL, original)
