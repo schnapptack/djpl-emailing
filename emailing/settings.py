@@ -15,6 +15,7 @@ introduce_EMAIL_HOST_USER = ''
 introduce_EMAIL_HOST_PASSWORD = ''
 introduce_EMAIL_PORT = 25
 introduce_EMAIL_USE_TLS = False
+introduce_EMAIL_USE_SSL = False
 introduce_DEFAULT_FROM_EMAIL = 'webmaster@localhost'
 introduce_SERVER_EMAIL = 'root@localhost'
 introduce_EMAIL_SUBJECT_PREFIX = '[Django] '
