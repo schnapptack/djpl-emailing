@@ -38,6 +38,8 @@ class HtmlEmail(EmailMessage):
         try:
             super(HtmlEmail, self).send(*args, **kwargs)
         except Exception:
+            # this is a fallback trying to ensure that emails are sent out in case something goes
+            # wrong with default implementation.
             if settings.FALLBACK_EMAIL != 'webmaster@localhost':
                 fallback_mail = settings.FALLBACK_EMAIL
             else:
