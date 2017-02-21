@@ -7,7 +7,10 @@ import premailer
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib, os
-
+import logging
+# we dont want these warnings on our console output (e.g. in test cases)
+import cssutils
+cssutils.log.setLevel(logging.CRITICAL)
 
 class TextEmail(EmailMessage):
     #content_subtype = 'text/plain'
