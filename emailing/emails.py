@@ -30,6 +30,10 @@ class HtmlEmail(EmailMessage):
         context['brand_color'] = settings.EMAIL_BRAND_COLOR
         context['link_color'] = settings.EMAIL_LINK_COLOR
         context['footer_content'] = settings.EMAIL_FOOTER_CONTENT
+        context['logo_src'] = settings.EMAIL_LOGO_SRC
+        context['logo_href'] = settings.EMAIL_LOGO_HREF
+        context['logo_alignment'] = settings.EMAIL_LOGO_ALIGNMENT
+        context['logo_alt_text'] = settings.EMAIL_LOGO_ALT_TEXT
 
         kwargs['body'] = premailer.transform(get_template(template).render(Context(context)))
 

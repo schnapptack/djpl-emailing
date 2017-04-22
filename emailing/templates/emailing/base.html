@@ -1,329 +1,299 @@
-<!doctype html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Simple Transactional Email</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"> <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
+    <title></title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+
+    <!-- Web Font / @font-face : BEGIN -->
+    <!-- NOTE: If web fonts are not required, lines 10 - 27 can be safely removed. -->
+
+    <!-- Desktop Outlook chokes on web font references and defaults to Times New Roman, so we force a safe fallback font. -->
+    <!--[if mso]>
+        <style>
+            * {
+                font-family: sans-serif !important;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- All other clients get the webfont reference; some will render the font and others will silently fail to the fallbacks. More on that here: http://stylecampaign.com/blog/2015/02/webfont-support-in-email/ -->
+    <!--[if !mso]><!-->
+        <!-- insert web font reference, eg: <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'> -->
+    <!--<![endif]-->
+
+    <!-- Web Font / @font-face : END -->
+
+    <!-- CSS Reset -->
     <style>
-      /* -------------------------------------
-          GLOBAL RESETS
-      ------------------------------------- */
-      img {
-        border: none;
-        -ms-interpolation-mode: bicubic;
-        max-width: 100%; }
 
-      body {
-        background-color: #ffffff;
-        color:#666666;
-        font-family: sans-serif;
-        -webkit-font-smoothing: antialiased;
-        font-size: 14px;
-        line-height: 1.4;
-        margin: 0;
-        padding: 0;
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%; }
-
-      table {
-        border-collapse: separate;
-        mso-table-lspace: 0pt;
-        mso-table-rspace: 0pt;
-        width: 100%; }
-        table td {
-          font-family: sans-serif;
-          font-size: 14px;
-          vertical-align: top; }
-
-      /* -------------------------------------
-          BODY & CONTAINER
-      ------------------------------------- */
-
-      .body {
-        background-color: #ffffff;
-        width: 100%; }
-
-      /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
-      .container {
-        display: block;
-        Margin: 0 auto !important;
-        /* makes it centered */
-        max-width: 580px;
-        padding: 10px;
-
-        width: 580px; }
-
-      /* This should also be a block element, so that it will fill 100% of the .container */
-      .content {
-        box-sizing: border-box;
-        display: block;
-        Margin: 0 auto;
-        max-width: 580px;
-        padding: 10px; }
-
-      /* -------------------------------------
-          HEADER, FOOTER, MAIN
-      ------------------------------------- */
-      .main {
-        background: #fff;
-        border-radius: 3px;
-        width: 100%; }
-
-      .wrapper {
-        box-sizing: border-box;
+        /* What it does: Remove spaces around the email design added by some email clients. */
+        /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+        html,
+        body {
+            margin: 0 auto !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+            line-height: 1;
+             mso-line-height-rule: exactly;
         }
 
-      .footer {
-        clear: both;
-        padding-top: 10px;
-        text-align: left;
-        width: 100%; }
-        .footer td,
-        .footer p,
-        .footer span,
-        .footer a {
-          color: #999999;
-          font-size: 12px;
-          text-align: left; }
-
-      /* -------------------------------------
-          TYPOGRAPHY
-      ------------------------------------- */
-      h1,
-      h2,
-      h3,
-      h4 {
-        color: #666666;
-        font-family: sans-serif;
-        font-weight: 300;
-        line-height: 1.4;
-        margin: 0;
-        Margin-bottom: 30px; }
-
-      h1 {
-        font-size: 35px;
-        font-weight: 300;
-        text-align: left;
-        /*text-transform: capitalize;*/
-      }
-
-      p,
-      ul,
-      ol {
-        font-family: sans-serif;
-        font-size: 14px;
-        font-weight: normal;
-        margin: 0;
-        Margin-bottom: 15px; }
-        p li,
-        ul li,
-        ol li {
-          list-style-position: inside;
-          margin-left: 5px; }
-
-      a {
-        color: {{ link_color }};
-        text-decoration: underline; }
-
-      /* -------------------------------------
-          BUTTONS
-      ------------------------------------- */
-      .btn {
-        box-sizing: border-box;
-        width: 100%; }
-        .btn > tbody > tr > td {
-          padding-bottom: 15px; }
-        .btn table {
-          width: auto; }
-        .btn table td {
-          background-color: #ffffff;
-          border-radius: 5px;
-          text-align: center; }
-        .btn a {
-          background-color: #ffffff;
-          border: solid 1px {{ brand_bg }};
-          border-radius: 5px;
-          box-sizing: border-box;
-          color: {{ brand_bg }};
-          cursor: pointer;
-          display: inline-block;
-          font-size: 14px;
-          font-weight: bold;
-          margin: 0;
-          padding: 12px 25px;
-          text-decoration: none;
-          /*text-transform: capitalize; */
+        /* What it does: Stops email clients resizing small text. */
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
         }
 
-      .btn-primary table td {
-        background-color: {{ brand_bg }}; }
+        /* What it does: Centers email on Android 4.4 */
+        div[style*="margin: 16px 0"] {
+            margin:0 !important;
+        }
 
-      .btn-primary a {
-        background-color: {{ brand_bg }};
-        border-color: {{ brand_bg }};
-        color: {{ brand_color }}; }
+        /* What it does: Stops Outlook from adding extra spacing to tables. */
+        table,
+        td {
+            mso-table-lspace: 0pt !important;
+            mso-table-rspace: 0pt !important;
+        }
 
-      /* -------------------------------------
-          OTHER STYLES THAT MIGHT BE USEFUL
-      ------------------------------------- */
-      .last {
-        margin-bottom: 0; }
+        th {text-align:left;}
 
-      .first {
-        margin-top: 0; }
+        a {color: {{ brand_bg }}}
 
-      .align-center {
-        text-align: center; }
+        /* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+        table {
+            font-family: sans-serif;
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin: 0 auto !important;
+        }
+        table table table {
+            table-layout: auto;
+        }
 
-      .align-right {
-        text-align: right; }
+        h1 {font-weight:normal; margin:0px; color: {{ brand_bg }};}
+        h1, h2, h3 {font-weight:normal; padding:0px; margin:0px;  line-height:1;}
 
-      .align-left {
-        text-align: left; }
+        /* What it does: Uses a better rendering method when resizing images in IE. */
+        img {
+            -ms-interpolation-mode:bicubic;
+        }
 
-      .clear {
-        clear: both; }
+        /* What it does: A work-around for iOS meddling in triggered links. */
+        *[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
 
-      .mt0 {
-        margin-top: 0; }
+        /* What it does: A work-around for Gmail meddling in triggered links. */
+        .x-gmail-data-detectors,
+        .x-gmail-data-detectors *,
+        .aBn {
+            border-bottom: 0 !important;
+            cursor: default !important;
+        }
 
-      .mb0 {
-        margin-bottom: 0; }
+        /* What it does: Prevents Gmail from displaying an download button on large, non-linked images. */
+        .a6S {
+	        display: none !important;
+	        opacity: 0.01 !important;
+        }
+        /* If the above doesn't work, add a .g-img class to any image in question. */
+        img.g-img + div {
+	        display:none !important;
+	   	}
 
-      .preheader {
-        color: transparent;
-        display: none;
-        height: 0;
-        max-height: 0;
-        max-width: 0;
-        opacity: 0;
-        overflow: hidden;
-        mso-hide: all;
-        visibility: hidden;
-        width: 0; }
+        /* What it does: Prevents underlining the button text in Windows 10 */
+        .button-link {
+            text-decoration: none !important;
+        }
 
-      .powered-by a {
-        text-decoration: none; }
-
-      hr {
-        border: 0;
-        border-bottom: 1px solid #f6f6f6;
-        Margin: 20px 0; }
-
-      /* -------------------------------------
-          RESPONSIVE AND MOBILE FRIENDLY STYLES
-      ------------------------------------- */
-      @media only screen and (max-width: 620px) {
-        table[class=body] h1 {
-          font-size: 28px !important;
-          margin-bottom: 10px !important; }
-        table[class=body] p,
-        table[class=body] ul,
-        table[class=body] ol,
-        table[class=body] td,
-        table[class=body] span,
-        table[class=body] a {
-          font-size: 16px !important; }
-        table[class=body] .wrapper,
-        table[class=body] .article {
-          padding: 10px !important; }
-        table[class=body] .content {
-          padding: 0 !important; }
-        table[class=body] .container {
-          padding: 0 !important;
-          width: 100% !important; }
-        table[class=body] .main {
-          border-left-width: 0 !important;
-          border-radius: 0 !important;
-          border-right-width: 0 !important; }
-        table[class=body] .btn table {
-          width: 100% !important; }
-        table[class=body] .btn a {
-          width: 100% !important; }
-        table[class=body] .img-responsive {
-          height: auto !important;
-          max-width: 100% !important;
-          width: auto !important; }}
-
-      /* -------------------------------------
-          PRESERVE THESE STYLES IN THE HEAD
-      ------------------------------------- */
-      @media all {
-        .ExternalClass {
-          width: 100%; }
-        .ExternalClass,
-        .ExternalClass p,
-        .ExternalClass span,
-        .ExternalClass font,
-        .ExternalClass td,
-        .ExternalClass div {
-          line-height: 100%; }
-        .apple-link a {
-          color: inherit !important;
-          font-family: inherit !important;
-          font-size: inherit !important;
-          font-weight: inherit !important;
-          line-height: inherit !important;
-          text-decoration: none !important; }
-        .btn-primary table td:hover {
-          background-color: #34495e !important; }
-        .btn-primary a:hover {
-          background-color: #34495e !important;
-          border-color: #34495e !important; } }
+        /* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
+        /* Create one of these media queries for each additional viewport size you'd like to fix */
+        /* Thanks to Eric Lepetit @ericlepetitsf) for help troubleshooting */
+        @media only screen and (min-device-width: 375px) and (max-device-width: 413px) { /* iPhone 6 and 6+ */
+            .email-container {
+                min-width: 375px !important;
+            }
+        }
 
     </style>
-  </head>
-  <body class="">
-    <table border="0" cellpadding="0" cellspacing="0" class="body">
-      <tr>
-        <td>&nbsp;</td>
-        <td class="container">
-          <div class="content">
 
-            <!-- START CENTERED WHITE CONTAINER -->
-            {% comment %}<span class="preheader"></span>{% endcomment %}
-            <table class="main">
+    <!-- What it does: Makes background images in 72ppi Outlook render at correct size. -->
+	<!--[if gte mso 9]>
+	<xml>
+		<o:OfficeDocumentSettings>
+			<o:AllowPNG/>
+			<o:PixelsPerInch>96</o:PixelsPerInch>
+		</o:OfficeDocumentSettings>
+	</xml>
+	<![endif]-->
 
-              <!-- START MAIN CONTENT AREA -->
-              <tr>
-                <td class="wrapper">
-                  <table border="0" cellpadding="0" cellspacing="0">
+    <!-- Progressive Enhancements -->
+    <style>
+
+        /* What it does: Hover styles for buttons */
+        .button-td,
+        .button-a {
+            transition: all 100ms ease-in;
+        }
+        .button-td:hover,
+        .button-a:hover {
+            background: #555555 !important;
+            border-color: #555555 !important;
+        }
+
+        /* Media Queries */
+        @media screen and (max-width: 480px) {
+
+            /* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
+            .fluid {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
+            /* What it does: Forces table cells into full-width rows. */
+            .stack-column,
+            .stack-column-center {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                direction: ltr !important;
+            }
+            /* And center justify these ones. */
+            .stack-column-center {
+                text-align: center !important;
+            }
+
+            /* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+            .center-on-narrow {
+                text-align: center !important;
+                display: block !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                float: none !important;
+            }
+            table.center-on-narrow {
+                display: inline-block !important;
+            }
+        }
+
+    </style>
+
+</head>
+<body width="100%" bgcolor="#eeeeee" style="margin: 0; mso-line-height-rule: exactly;">
+    <center style="width: 100%; background: #eeeeee; text-align: left;">
+        {% comment %}
+        <!-- Visually Hidden Preheader Text : BEGIN -->
+        <div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;">
+            (Optional) This text will appear in the inbox preview, but not the email body.
+        </div>
+        <!-- Visually Hidden Preheader Text : END -->
+        {% endcomment %}
+        <!--
+            Set the email width. Defined in two places:
+            1. max-width for all clients except Desktop Windows Outlook, allowing the email to squish on narrow but never go wider than 680px.
+            2. MSO tags for Desktop Windows Outlook enforce a 680px width.
+            Note: The Fluid and Responsive templates have a different width (600px). The hybrid grid is more "fragile", and I've found that 680px is a good width. Change with caution.
+        -->
+        <div style="max-width: 680px; margin: auto;" class="email-container">
+            <!--[if mso]>
+            <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="680" align="center">
+            <tr>
+            <td>
+            <![endif]-->
+
+            {% if logo_src %}
+                <!-- Email Header : BEGIN -->
+                <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;">
                     <tr>
-                      <td>
-                        {% block content %}
-
-                        {% endblock %}
-                      </td>
+                        <td style="padding: 20px 0; text-align: {{ logo_alignment }}">
+                            {% if logo_href %}<a href="{{ logo_href }}">{% endif %}
+                                <img src="{{ logo_src }}" aria-hidden="true" width="200" height="50" alt="{{ logo_alt_text }}" border="0" style="height: auto; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+                            {% if logo_href %}</a>{% endif %}
+                        </td>
                     </tr>
-                  </table>
-                </td>
-              </tr>
+                </table>
+            {% else %}
+                <br/><br/>
+            {% endif %}
+            <!-- Email Header : END -->
 
-              <!-- END MAIN CONTENT AREA -->
-              </table>
-
-            <!-- START FOOTER -->
-            <div class="footer">
-              <table border="0" cellpadding="0" cellspacing="0">
+            <!-- Email Body : BEGIN -->
+            <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px; ;">
                 <tr>
-                  <td class="content-block">
-                    {% block footer %}{{ footer_content|safe }}{% endblock %}
-                  </td>
+                    <td bgcolor="{{ brand_bg }}" height="5px"></td>
                 </tr>
+
+
+
+                {% block main %}
+
+                {% endblock %}
+
+
+
+                {% comment %}
+                <!-- 1 Column Text : BEGIN -->
                 <tr>
-                  <td class="content-block powered-by">
-                    {% block footer2 %}{% endblock %}
-                  </td>
+                    <td bgcolor="#ffffff">
+                        <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tr>
+                                <td style="padding: 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+                                    <h1>Hello</h1>
+                                    <h1>Hello</h1>
+                                    {% block content_2 %}
+                                        <table role="" aria-hidden="true" cellspacing="12" cellpadding="12" border="1" width="100%">
+                                            <tr>
+                                                <th>emaul</th>
+                                                <td>aaa@www.de</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Name</th>
+                                                <td>Toni</td>
+                                            </tr>
+                                        </table>
+                                    {% endblock %}
+                                    {% include "emailing/btn.html" with label="Click me you" href="https://schnapptack.de" align="left" %}
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
-              </table>
-            </div>
+                <!-- 1 Column Text : END -->
+                {% endcomment %}
 
-            <!-- END FOOTER -->
+            </table>
+            <!-- Email Body : END -->
 
-<!-- END CENTERED WHITE CONTAINER --></div>
-        </td>
-        <td>&nbsp;</td>
-      </tr>
-    </table>
-  </body>
+            <!-- Email Footer : BEGIN -->
+            <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;">
+                <tr>
+                    <td style="padding: 40px 10px;width: 100%;font-size: 12px; font-family: sans-serif; line-height:18px; text-align: center; color: #888888;" class="x-gmail-data-detectors">
+
+
+                        {{ footer_content|safe }}
+                        <br><br>
+
+                    </td>
+                </tr>
+            </table>
+            <!-- Email Footer : END -->
+
+            <!--[if mso]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </div>
+    </center>
+</body>
 </html>

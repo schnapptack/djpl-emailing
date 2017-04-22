@@ -30,3 +30,7 @@ introduce_EMAIL_FOOTER_CONTENT = '''
     <p>schnapptack GmbH | Schulze-Delitzsch-Straße 13 | 70565 Stuttgart</p>
     <p><a href="http://schnapptack.de">www.schnapptack.de</a></p>
 '''
+introduce_EMAIL_LOGO_SRC = 'https://schnapptack.de/media/cache/d2/0d/d20dcc25e5ea26e9d954703d2c0fec6c.png'
+introduce_EMAIL_LOGO_HREF = 'https://schnapptack.de'
+introduce_EMAIL_LOGO_ALT_TEXT = 'Logo'
+introduce_EMAIL_LOGO_ALIGNMENT = 'left'
