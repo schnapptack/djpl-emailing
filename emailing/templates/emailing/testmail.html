@@ -1,0 +1,33 @@
+{% extends 'emailing/base.html' %}
+{% load emailingtags %}
+
+
+{% block main %}
+    {% content_section %}
+
+    <h1>This is a headline</h1>
+
+    <p>Some lorem ipsum</p>
+
+    <p>And a button</p>
+
+
+    {% include "emailing/btn.html" with label="Click this button" href="https://schnapptack.de" %}
+
+    <br/>
+
+    <table bordercolor="#cccccc" border="1" width="100%" bordercolor="#bbbbbb" cellspacing="12" cellpadding="12">
+        <tr>
+            <th>Name</th>
+            <td>Max</td>
+        </tr>
+        <tr>
+            <th>Second name</th>
+            <td>Mustermann</td>
+        </tr>
+
+    </table>
+
+    {% end_content_section %}
+
+{% endblock %}

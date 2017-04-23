@@ -14,19 +14,12 @@ class SignupMailTest(NoMigrationsTestCase):
     """
     @override_settings(EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend')
     def test_send_email(self):
-        from django.conf import settings
-        context = dict(
-            brand_bg='#fff',
-            body_bg='#eee',
-            brand_color='#575757',
-            link_color='#2244DD',
-            footer_content='Welcome, this is a mail',
-        )
+
 
         msg = HtmlEmail(
             subject='test',
-            template='emailing/base.html',
-            context=context,
+            template='emailing/testmail.html',
+            context=dict(),
             to=['toni@schnapptack.de', ]
         )
         msg.content_subtype = 'html'
