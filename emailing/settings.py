@@ -22,7 +22,7 @@ introduce_EMAIL_SUBJECT_PREFIX = '[Django] '
 introduce_FALLBACK_EMAIL = 'webmaster@localhost'
 
 # these colors are used to brand the email appearance
-introduce_EMAIL_BRAND_BG = '#e91e63'
+introduce_EMAIL_BRAND_BG = '#93bd20'
 introduce_EMAIL_BRAND_COLOR = '#fff'
 introduce_EMAIL_BODY_BG = '#f6f6f6'
 introduce_EMAIL_LINK_COLOR = '#417690'
