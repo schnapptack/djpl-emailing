@@ -23,6 +23,7 @@ introduce_FALLBACK_EMAIL = 'webmaster@localhost'
 
 # these colors are used to brand the email appearance
 introduce_EMAIL_BRAND_BG = '#93bd20'
+introduce_EMAIL_BUTTON_BG = introduce_EMAIL_BRAND_BG
 introduce_EMAIL_BRAND_COLOR = '#fff'
 introduce_EMAIL_BODY_BG = '#f6f6f6'
 introduce_EMAIL_LINK_COLOR = '#417690'

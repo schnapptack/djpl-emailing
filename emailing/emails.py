@@ -22,10 +22,12 @@ class HtmlEmail(EmailMessage):
     content_subtype = 'html'
 
     def __init__(self, *args, **kwargs):
-        template = kwargs.pop('template')
-        context = kwargs.pop('context')
+        template = kwargs.pop('template', 'emailing/base.html')
+        context = kwargs.pop('context', dict())
+
 
         context['brand_bg'] = settings.EMAIL_BRAND_BG
+        context['button_bg'] = settings.EMAIL_BUTTON_BG
         context['body_bg'] = settings.EMAIL_BODY_BG
         context['brand_color'] = settings.EMAIL_BRAND_COLOR
         context['link_color'] = settings.EMAIL_LINK_COLOR
