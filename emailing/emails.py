@@ -44,19 +44,22 @@ class HtmlEmail(EmailMessage):
 
     def send(self, *args, **kwargs):
         kwargs['fail_silently'] = False
-        try:
+        if not settings.DEBUG:
+            try:
+                super(HtmlEmail, self).send(*args, **kwargs)
+            except Exception:
+                # this is a fallback trying to ensure that emails are sent out in case something goes
+                # wrong with default implementation.
+                if settings.FALLBACK_EMAIL != 'webmaster@localhost':
+                    fallback_mail = settings.FALLBACK_EMAIL
+                else:
+                    fallback_mail = settings.SERVER_EMAIL
+                smtpObj = smtplib.SMTP('localhost')
+                msg = MIMEMultipart('alternative')
+                msg.attach(MIMEText(self.body.encode('utf-8'), 'html', 'utf-8'))
+                msg['From'] = fallback_mail
+                msg['To'] = fallback_mail
+                msg['Subject'] = u"Error sending Email from " + str(self.from_email) + " to " + str(self.to) + " in container " + os.environ['CONTAINER_DIR']
+                smtpObj.sendmail(fallback_mail, fallback_mail, msg.as_string())
+        else:
             super(HtmlEmail, self).send(*args, **kwargs)
-        except Exception:
-            # this is a fallback trying to ensure that emails are sent out in case something goes
-            # wrong with default implementation.
-            if settings.FALLBACK_EMAIL != 'webmaster@localhost':
-                fallback_mail = settings.FALLBACK_EMAIL
-            else:
-                fallback_mail = settings.SERVER_EMAIL
-            smtpObj = smtplib.SMTP('localhost')
-            msg = MIMEMultipart('alternative')
-            msg.attach(MIMEText(self.body.encode('utf-8'), 'html', 'utf-8'))
-            msg['From'] = fallback_mail
-            msg['To'] = fallback_mail
-            msg['Subject'] = u"Error sending Email from " + str(self.from_email) + " to " + str(self.to) + " in container " + os.environ['CONTAINER_DIR']
-            smtpObj.sendmail(fallback_mail, fallback_mail, msg.as_string())
