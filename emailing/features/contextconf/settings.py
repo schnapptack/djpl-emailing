@@ -25,7 +25,7 @@ def refine_EMAIL_HOST_USER(original):
 
 
 def refine_EMAIL_HOST_PASSWORD(original):
-    return _override(PRODUCT_CONTEXT.EMAIL_HOST_PASSWORD, original)
+    return str(_override(PRODUCT_CONTEXT.EMAIL_HOST_PASSWORD, original))
 
 
 def refine_EMAIL_PORT(original):
