@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.template.loader import get_template
-from django.template import Context
 from django.core.mail import EmailMessage
 from django.conf import settings
 import premailer
@@ -37,7 +36,7 @@ class HtmlEmail(EmailMessage):
         context['logo_alignment'] = settings.EMAIL_LOGO_ALIGNMENT
         context['logo_alt_text'] = settings.EMAIL_LOGO_ALT_TEXT
 
-        kwargs['body'] = premailer.transform(get_template(template).render(Context(context)))
+        kwargs['body'] = premailer.transform(get_template(template).render(context))
 
         super(HtmlEmail, self).__init__(*args, **kwargs)
 
