@@ -17,6 +17,20 @@ class UpperNode(template.Node):
 
     def render(self, context):
         inner_html = self.nodelist.render(context)
-
-
         return get_template('emailing/content_section.html').render(dict(inner_html=inner_html))
+
+
+
+@register.simple_tag
+def br():
+    """
+    Linebreak in email links mailto:?body=...
+    """
+    return '%0D%0A'
+
+@register.simple_tag
+def space():
+    """
+    Space in email links mailto:?body=...
+    """
+    return '%20'
